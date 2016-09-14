@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnSentIP = (Button) findViewById(R.id.btnSentIP);
-
+    //tamban
         btnSentIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
