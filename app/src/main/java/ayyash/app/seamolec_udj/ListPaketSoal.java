@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Ayyash on 9/15/2016.
@@ -19,6 +20,8 @@ public class ListPaketSoal extends AppCompatActivity {
 
 
     private TextView textView;
+    private String ambilIP;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +38,19 @@ public class ListPaketSoal extends AppCompatActivity {
         bottomToolbar.inflateMenu(R.menu.menu_bottom);
 
 
+
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String nis = sharedPreferences.getString(Config.NIS_SHARED_PREF,"tidak tersedia");
 
+
+
+
+
+        SharedPreferences sps = getSharedPreferences("", MODE_PRIVATE);
+        ambilIP = sps.getString("IPnya", "");
+
+
+        Toast.makeText(ListPaketSoal.this, "Listening to IP: : " + ambilIP, Toast.LENGTH_LONG).show();
 
 
         textView.setText("NIS : " + nis);
@@ -66,6 +79,9 @@ public class ListPaketSoal extends AppCompatActivity {
 
 
                         editor.commit();
+
+
+                        //clear sp IP
 
 
                         Intent intent = new Intent(ListPaketSoal.this, Login.class);

@@ -3,43 +3,64 @@ package ayyash.app.seamolec_udj;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
+
+
 
 
 /**
  * Created by Ayyash on 9/15/2016.
  */
-public class Register extends AppCompatActivity {
+public class Register extends AppCompatActivity implements Spinner.OnItemSelectedListener   {
 
 
-    EditText nis,password,nama,id_kelas;
-    Button btnRegister,btnAmbil;
-    private ProgressDialog pDialog;
-    TextView tv;
+
+    Button btnRegister;
+
     private String ambilIP;
+    private EditText nis,password,nama;
+    private int ambilIDKelas;
+
+
+    //kebutuhan buat list
+    private Spinner spinner;
+    //An ArrayList for Spinner Items
+    private ArrayList<String> students = new ArrayList<>();
+    //JSON Array
+    private JSONArray result;
+
+
+    private TextView textViewName;
+
 
 
     @Override
@@ -51,12 +72,35 @@ public class Register extends AppCompatActivity {
         nis = (EditText)findViewById(R.id.nis);
         password = (EditText)findViewById(R.id.password);
         nama = (EditText)findViewById(R.id.nama);
-        id_kelas = (EditText)findViewById(R.id.id_kelas);
+       // id_kelas = (EditText)findViewById(R.id.id_kelas);
         btnRegister = (Button)findViewById(R.id.btnRegister);
 
-        pDialog = new ProgressDialog(this);
-        pDialog.setMessage("Please wait...");
-        pDialog.setCancelable(false);
+
+        //Initializing Spinner
+        spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(this);
+
+
+
+        //Initializing TextViews
+        textViewName = (TextView) findViewById(R.id.textViewName);
+
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String a = nis.getText().toString();
+                String b = password.getText().toString();
+                String c = nama.getText().toString();
+                String d = getIdKelas(ambilIDKelas);
+
+                Log.d("UYEEEE", a+ " " + b + " " + c + "  " +d );
+            }
+        });
+
+
+
+
 
 
         //ngambil IP
@@ -66,16 +110,92 @@ public class Register extends AppCompatActivity {
         Toast.makeText(Register.this, "IP Server: " + ambilIP, Toast.LENGTH_LONG).show();
 
 
+        getListKelas();
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // Toast.makeText(getApplicationContext(),"Simpan", Toast.LENGTH_SHORT).show();
-                setSiswaDetails();
+    }
 
+
+    private void getListKelas(){
+        //Creating a string request
+        StringRequest stringRequest = new StringRequest("http://"+ambilIP+"/new_udj/get_kelas.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        JSONObject j;
+                        try {
+                            //Parsing the fetched Json String to JSON Object
+                            j = new JSONObject(response);
+
+                            //Storing the Array of JSON String to our JSON Array
+                            result = j.getJSONArray(ConfigKelas.JSON_ARRAY);
+
+                            //Calling method getStudents to get the students from the JSON Array
+                            getNamaKelas(result);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+        //Creating a request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
+    }
+
+    private void getNamaKelas(JSONArray j){
+        //Traversing through all the items in the json array
+        for(int i=0;i<j.length();i++){
+            try {
+                //Getting json object
+                JSONObject json = j.getJSONObject(i);
+
+                //Adding the name of the student to array list
+                students.add(json.getString(ConfigKelas.TAG_NAMA_KEALS));
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
+        }
 
+        //Setting adapter to show the items in the spinner
+        spinner.setAdapter(new ArrayAdapter<String>(Register.this, android.R.layout.simple_spinner_dropdown_item, students));
+    }
+
+
+    //Method to get student name of a particular position
+
+    private String getIdKelas(int position){
+        this.ambilIDKelas =position;
+        String idKelasnya="";
+        try {
+            //Getting object of given index
+            JSONObject json = result.getJSONObject(position);
+
+            //Fetching name from that object
+            idKelasnya = json.getString(ConfigKelas.TAG_ID_KELAS);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //Returning the name
+        return idKelasnya;
+    }
+
+
+    public void insert(){
+        String saveNis = nis.getText().toString();
+        String savePass = nis.getText().toString();
+        String saveNama = nis.getText().toString();
+
+        //parsing id kelas
+        String sIdKelas = getIdKelas(ambilIDKelas);
+        int saveIdKelas = Integer.parseInt(sIdKelas);
 
 
     }
@@ -84,76 +204,22 @@ public class Register extends AppCompatActivity {
 
 
 
-    DataSiswa ds;
-
-    private void setSiswaDetails() {
-        showpDialog();
-
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://"+ambilIP+"/").
-                        addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        APIService service = retrofit.create(APIService.class);
-         ds = new DataSiswa();
-
-        ds.setNis(nis.getText().toString());
-        ds.setPassword(password.getText().toString());
-        ds.setNama(nama.getText().toString());
-
-        int ayyash1 = Integer.parseInt(id_kelas.getText().toString());
-        ds.setId_kelas(ayyash1);
-
-
-        final Call<DataSiswa> simpanSiswa = service.setDataSiswaDetails(ds.getNis(),ds.getPassword(), ds.getNama(),ds.getId_kelas());
-
-
-
-                Intent i = new Intent(getApplicationContext(),Login.class);
-                startActivity(i);
-                finish();
-
-
-        Log.d("uye","uye" +simpanSiswa);
-
-
-        simpanSiswa.enqueue(new Callback<DataSiswa>() {
-            @Override
-            public void onResponse(Call<DataSiswa> call, Response<DataSiswa> response) {
-                hidepDialog();
-
-//                if(call.isExecuted()==true && ds.getNis().toString()!=null){
-//                    Toast.makeText(getApplicationContext(),"Data Tersimpan", Toast.LENGTH_SHORT).show();
-//                }
 
 
 
 
-            }
-            @Override
-            public void onFailure(Call<DataSiswa> call, Throwable t) {
-                hidepDialog();
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
-
+        textViewName.setText(getIdKelas(position));
 
 
     }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
-
-    private void showpDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
     }
-
-    private void hidepDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-    }
-
-
 }

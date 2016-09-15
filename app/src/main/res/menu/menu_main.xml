@@ -8,12 +8,14 @@
     <!--</item>-->
     <item
         android:id="@+id/user"
-        android:icon="@drawable/ic_perm_identity_white"
+        android:icon="@drawable/logo_atas"
         app:showAsAction="ifRoom|withText"
-        android:title="Profile">
+        android:title="">
             <menu>
                 <item android:id="@+id/menuLogout"
-                    android:title="Logout" />
+                    android:title="Logout/keluar" />
             </menu>
+
+
         </item>
 </menu>
