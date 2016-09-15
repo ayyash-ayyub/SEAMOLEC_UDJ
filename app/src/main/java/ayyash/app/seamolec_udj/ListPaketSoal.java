@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -24,6 +25,14 @@ public class ListPaketSoal extends AppCompatActivity {
         setContentView(R.layout.activity_list_paket_soal);
 
         textView = (TextView)findViewById(R.id.textView5);
+        /* Top toolbar */
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.menu_main);
+        setSupportActionBar(toolbar);
+
+       /* Bottom toolbar. */
+        Toolbar bottomToolbar = (Toolbar) findViewById(R.id.bottom_toolbar);
+        bottomToolbar.inflateMenu(R.menu.menu_bottom);
 
 
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -82,7 +91,7 @@ public class ListPaketSoal extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Adding our menu to toolbar
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

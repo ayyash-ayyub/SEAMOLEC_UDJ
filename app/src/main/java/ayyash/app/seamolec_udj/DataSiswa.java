@@ -14,6 +14,24 @@ import com.google.gson.annotations.SerializedName;
  */
 public class DataSiswa {
 
+    @SerializedName("id")
+    private String id;
+    @SerializedName("id_kelas")
+    private int id_kelas;
+    @SerializedName("password")
+    private String password;
+    @SerializedName("nis")
+    private String nis;
+    @SerializedName("nama")
+    private String nama;
+
+//    public DataSiswa(String nis, String password, String nama, int id_kelas){
+//        this.nis = nis;
+//        this.password = password;
+//        this.nama = nama;
+//        this.id_kelas = id_kelas;
+//    }
+
     public String getId() {
         return id;
     }
@@ -21,9 +39,6 @@ public class DataSiswa {
     public void setId(String id) {
         this.id = id;
     }
-
-    @SerializedName("id")
-    private String id;
 
     public String getNis() {
         return nis;
@@ -33,20 +48,13 @@ public class DataSiswa {
         this.nis = nis;
     }
 
-    @SerializedName("nis")
-    private String nis;
-
     public String getPassword() {
         return password;
     }
 
-
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @SerializedName("password")
-    private String password;
 
     public String getNama() {
         return nama;
@@ -63,16 +71,6 @@ public class DataSiswa {
     public void setId_kelas(int id_kelas) {
         this.id_kelas = id_kelas;
     }
-
-    @SerializedName("id_kelas")
-    private int id_kelas;
-
-
-    @SerializedName("nama")
-    private String nama;
-
-
-
 
 
 }
