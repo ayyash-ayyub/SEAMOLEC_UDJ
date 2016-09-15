@@ -77,15 +77,12 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //In onresume fetching value from sharedpreference
+
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME,Context.MODE_PRIVATE);
+         loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
 
-        //Fetching the boolean value form sharedpreferences
-        loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
 
-        //If we will get true
         if(loggedIn){
-            //We will start the Profile Activity
             Intent intent = new Intent(Login.this, ListPaketSoal.class);
             startActivity(intent);
         }
@@ -93,60 +90,57 @@ public class Login extends AppCompatActivity {
 
 
     private void login(){
-        //Getting values from edit texts
-        //Getting values from edit texts
         final String nisA = nis.getText().toString().trim();
         final String passwordA =password .getText().toString().trim();
 
-        //Creating a string request
+
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //If we are getting success from server
-                        if(response.equalsIgnoreCase(Config.LOGIN_SUCCESS)){
-                            //Creating a shared preference
-                            SharedPreferences sharedPreferences = Login.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                            if(response.equalsIgnoreCase(Config.LOGIN_SUCCESS)){
 
-                            //Creating editor to store values to shared preferences
+                            SharedPreferences sharedPreferences = Login.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                            //Adding values to editor
+
+
                             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
                             editor.putString(Config.NIS_SHARED_PREF, nisA);
 
-                            //Saving values to editor
+
                             editor.commit();
 
-                            //Starting profile activity
+
                             Intent intent = new Intent(Login.this, ListPaketSoal.class);
                             startActivity(intent);
                         }else{
-                            //If the server response is not success
-                            //Displaying an error message on toast
-                            Toast.makeText(Login.this, "Invalid username or password", Toast.LENGTH_LONG).show();
+
+                            Toast.makeText(Login.this, "username atau password salah", Toast.LENGTH_LONG).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //You can handle error here if you want
+
                     }
                 }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                //Adding parameters to request
+
                 params.put(Config.KEY_NIS, nisA);
                 params.put(Config.KEY_PASSWORD, passwordA);
 
-                //returning parameter
+
+
                 return params;
             }
         };
 
-        //Adding the string request to the queue
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 

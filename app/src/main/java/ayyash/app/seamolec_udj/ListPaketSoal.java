@@ -30,7 +30,8 @@ public class ListPaketSoal extends AppCompatActivity {
         String nis = sharedPreferences.getString(Config.NIS_SHARED_PREF,"tidak tersedia");
 
 
-        textView.setText("Current User: " + nis);
+
+        textView.setText("NIS : " + nis);
 
 
     }
@@ -38,8 +39,8 @@ public class ListPaketSoal extends AppCompatActivity {
     private void logout(){
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("Are you sure you want to logout?");
-        alertDialogBuilder.setPositiveButton("Yes",
+        alertDialogBuilder.setMessage("Anda akan logout dari aplikasi?");
+        alertDialogBuilder.setPositiveButton("Ya",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -63,7 +64,7 @@ public class ListPaketSoal extends AppCompatActivity {
                     }
                 });
 
-        alertDialogBuilder.setNegativeButton("No",
+        alertDialogBuilder.setNegativeButton("Batal",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
