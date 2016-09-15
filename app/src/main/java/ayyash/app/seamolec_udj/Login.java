@@ -75,11 +75,6 @@ public class Login extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
     }
 
     @Override
@@ -93,6 +88,7 @@ public class Login extends AppCompatActivity {
         if(loggedIn){
             Intent intent = new Intent(Login.this, ListPaketSoal.class);
             startActivity(intent);
+            finish();
         }
     }
 

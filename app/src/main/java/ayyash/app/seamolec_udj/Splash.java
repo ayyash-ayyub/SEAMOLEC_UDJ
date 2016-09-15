@@ -29,6 +29,7 @@ public class Splash extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 Intent i = new Intent(Splash.this, MainActivity.class);
                 startActivity(i);
+                finish();
 
 
                 //jeda selesai Splashscreen
