@@ -16,7 +16,7 @@
         android:layout_marginRight="32dp"
         android:background="@drawable/edittext_login_form"
         android:hint="NIS"
-        android:id="@+id/username" />
+        android:id="@+id/nis" />
 
     <EditText
         android:layout_width="match_parent"

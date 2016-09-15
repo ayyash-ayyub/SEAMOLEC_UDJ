@@ -25,6 +25,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
+/**
+ * Created by Ayyash on 9/15/2016.
+ */
 public class Register extends AppCompatActivity {
 
 
@@ -138,7 +142,7 @@ public class Register extends AppCompatActivity {
         showpDialog();
 
         final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.50.132/").
+                .baseUrl("http://192.168.50.37/").
                         addConverterFactory(GsonConverterFactory.create())
                 .build();
 
