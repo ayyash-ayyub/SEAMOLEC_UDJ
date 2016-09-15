@@ -61,6 +61,7 @@ public class ListPaketSoal extends AppCompatActivity {
 
                         Intent intent = new Intent(ListPaketSoal.this, Login.class);
                         startActivity(intent);
+                        finish();
                     }
                 });
 
