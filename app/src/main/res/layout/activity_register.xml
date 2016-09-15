@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Lengkapi data siswa :"
+        android:id="@+id/textView3"
+        android:textColor="#ffffff" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="32dp"
+        android:id="@+id/nis"
+        android:background="@drawable/edittext_login_form"
+        android:hint="NIS" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="32dp"
+        android:id="@+id/password"
+        android:background="@drawable/edittext_login_form"
+        android:hint="password" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nama"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/edittext_login_form"
+        android:hint="nama" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_kelas"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/edittext_login_form"
+        android:hint="kelas" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simpan"
+        android:id="@+id/btnRegister"
+        android:background="@drawable/button_login_form"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView4"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ambil"
+        android:id="@+id/btnAmbil"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

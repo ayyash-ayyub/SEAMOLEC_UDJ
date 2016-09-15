@@ -15,7 +15,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/edittext_login_form"
-        android:hint="Username"
+        android:hint="NIS"
         android:id="@+id/username" />
 
     <EditText
@@ -66,6 +66,7 @@
         android:layout_marginRight="32dp"
         android:textColor="#FFFFFF"
         android:background="@drawable/button_login_form"
-        android:text="Register" />
+        android:text="Register"
+        android:id="@+id/btnRegister" />
 
 </LinearLayout>

@@ -19,6 +19,6 @@ import retrofit2.http.GET;
  */
 public interface GETAPIService {
 
-    @GET("my_json")
+    @GET("http://192.168.50.132/new_udj/ngecek.php/")
     Call<List<DataSiswa>> getDataSiswaDetails();
 }
