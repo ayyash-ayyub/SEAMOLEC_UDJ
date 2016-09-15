@@ -31,6 +31,7 @@ public class Login extends AppCompatActivity {
 
     EditText nis, password;
     Button btnLogin,btnRegister;
+    private String ambilIP;
     private boolean loggedIn = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,13 @@ public class Login extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnRegister = (Button)findViewById(R.id.btnRegister);
+
+        //ngambil IP
+        SharedPreferences sps = getSharedPreferences("", MODE_PRIVATE);
+         ambilIP = sps.getString("IPnya", "");
+
+        Toast.makeText(Login.this, "IP Server: " + ambilIP, Toast.LENGTH_LONG).show();
+
 
 
       btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +103,7 @@ public class Login extends AppCompatActivity {
 
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://"+ambilIP+"/new_udj/login.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -117,7 +125,7 @@ public class Login extends AppCompatActivity {
                             startActivity(intent);
                         }else{
 
-                            Toast.makeText(Login.this, "username atau password salah", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Login.this, "username/password salah /masalah koneksi ke server", Toast.LENGTH_LONG).show();
                         }
                     }
                 },

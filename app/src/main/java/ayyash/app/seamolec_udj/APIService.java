@@ -8,6 +8,8 @@ package ayyash.app.seamolec_udj;
 
 
 
+import android.content.SharedPreferences;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,22 +24,21 @@ import retrofit2.http.POST;
  * Created by Ayyash on 9/14/2016.
  */
 public interface APIService {
-    @GET("http://192.168.50.37/new_udj/ngecek.php/")
-    Call<List<DataSiswa>>getSiswaDetails();
+
+
+
 
     @FormUrlEncoded
-    @POST("http://192.168.50.37/new_udj/insert.php/")
+    @POST("/new_udj/insert.php/")
    Call<DataSiswa> setDataSiswaDetails(@Field("nis") String nis,@Field("password") String password, @Field("nama") String nama,  @Field("id_kelas") int id_kelas );
 
 
 
-//    @FormUrlEncoded
-//    @POST("http://192.168.50.132/new_udj/insert.php")
-//    void postData(@Field("nis") String nis,
-//                  @Field("password") String password,
-//                  @Field("nama") String nama,
-//                  Call<DataSiswa> setDataSiswaDetails);
+
+
 }
+
+
 
 
 

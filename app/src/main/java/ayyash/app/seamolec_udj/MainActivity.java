@@ -1,6 +1,7 @@
 package ayyash.app.seamolec_udj;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +9,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btnSentIP;
+    EditText txtIP;
+    public String SIERRA_IP;
+    public SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,14 +25,30 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        txtIP =(EditText)findViewById(R.id.txtIP);
         btnSentIP = (Button) findViewById(R.id.btnSentIP);
+
+
     //tamban
         btnSentIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),Login.class);
-                startActivity(i);
-                finish();
+               if(txtIP.getText().toString().isEmpty()){
+                   Toast.makeText(MainActivity.this, "masukan IP Server", Toast.LENGTH_SHORT).show();
+               }else {
+
+                   SIERRA_IP = txtIP.getText().toString();
+
+                   // nyimpan IP di SP
+                   sp = getSharedPreferences("",MODE_PRIVATE);
+                   SharedPreferences.Editor ed = sp.edit();
+                   ed.putString("IPnya", SIERRA_IP);
+                   ed.commit();
+
+                   Intent i = new Intent(getApplicationContext(),Login.class);
+                   startActivity(i);
+                   finish();
+               }
             }
         });
     }

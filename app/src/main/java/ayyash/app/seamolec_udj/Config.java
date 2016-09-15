@@ -5,7 +5,7 @@ package ayyash.app.seamolec_udj;
  */
 public class Config {
 
-    public static final String LOGIN_URL = "http://192.168.50.37/new_udj/login.php";
+   // public static final String LOGIN_URL = "http://192.168.50.37/new_udj/login.php";
 
     public static final String KEY_NIS = "nis";
     public static final String KEY_PASSWORD = "password";

@@ -2,6 +2,7 @@ package ayyash.app.seamolec_udj;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 
 /**
@@ -36,6 +39,7 @@ public class Register extends AppCompatActivity {
     Button btnRegister,btnAmbil;
     private ProgressDialog pDialog;
     TextView tv;
+    private String ambilIP;
 
 
     @Override
@@ -49,12 +53,18 @@ public class Register extends AppCompatActivity {
         nama = (EditText)findViewById(R.id.nama);
         id_kelas = (EditText)findViewById(R.id.id_kelas);
         btnRegister = (Button)findViewById(R.id.btnRegister);
-        tv = (TextView)findViewById(R.id.textView4);
-        btnAmbil = (Button)findViewById(R.id.btnAmbil);
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
+
+
+        //ngambil IP
+        SharedPreferences sps = getSharedPreferences("", MODE_PRIVATE);
+        ambilIP = sps.getString("IPnya", "");
+
+        Toast.makeText(Register.this, "IP Server: " + ambilIP, Toast.LENGTH_LONG).show();
+
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -66,69 +76,7 @@ public class Register extends AppCompatActivity {
             }
         });
 
-        btnAmbil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                showpDialog();
-
-
-                try {
-
-                    Gson gson = new GsonBuilder()
-                            .setLenient()
-                            .create();
-
-
-
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://192.168.50.132/new_udj/ngecek.php/").
-                                    addConverterFactory(GsonConverterFactory.create(gson))
-                            .build();
-
-                    APIService service = retrofit.create(APIService.class);
-
-                    Call<List<DataSiswa>> call = service.getSiswaDetails();
-
-                    call.enqueue(new Callback<List<DataSiswa>>() {
-                        @Override
-                        public void onResponse(Call<List<DataSiswa>> call, Response<List<DataSiswa>> response) {
-                            List<DataSiswa> peopleData = response.body();
-                            String details = "";
-                            for (int i = 0; i < peopleData.size(); i++) {
-                                String nis = peopleData.get(i).getNis();
-
-
-                                details += "nis: " + nis + "\n" +
-                                        "pass: " + password + "\n\n";
-
-
-                            }
-                            Toast.makeText(Register.this, details, Toast.LENGTH_SHORT).show();
-                           tv.setText(details);
-                            hidepDialog();
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<DataSiswa>> call, Throwable t) {
-                            Log.d("onFailure", t.toString());
-                            hidepDialog();
-                        }
-                    });
-
-                } catch (Exception e) {
-                    Log.d("onResponse", "There is an error");
-                    e.printStackTrace();
-                    hidepDialog();
-                }
-
-
-
-
-
-            }
-        });
 
     }
 
@@ -142,7 +90,7 @@ public class Register extends AppCompatActivity {
         showpDialog();
 
         final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.50.37/").
+                .baseUrl("http://"+ambilIP+"/").
                         addConverterFactory(GsonConverterFactory.create())
                 .build();
 
