@@ -94,13 +94,15 @@ public class Register extends AppCompatActivity implements Spinner.OnItemSelecte
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String a = nis.getText().toString();
-//                String b = password.getText().toString();
-//                String c = nama.getText().toString();
-//                String d = getIdKelas(ambilIDKelas);
+
+                if(nis.getText().toString().isEmpty()|| password.getText().toString().isEmpty() || nama.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(), "pastikan semua field terisi", Toast.LENGTH_SHORT).show();
+                }else {
+                    registerUser();
+                }
 //
 //                Log.d("UYEEEE", a+ " " + b + " " + c + "  " +d );
-                registerUser();
+
             }
         });
 
@@ -215,6 +217,9 @@ private void registerUser(){
                 @Override
                 public void onResponse(String response) {
                     Toast.makeText(Register.this,response,Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(Register.this, Login.class);
+                    startActivity(i);
+                    finish();
                 }
             },
             new Response.ErrorListener() {
