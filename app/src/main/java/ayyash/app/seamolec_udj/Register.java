@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -31,10 +32,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-
-
+import java.util.Map;
 
 
 /**
@@ -60,6 +60,11 @@ public class Register extends AppCompatActivity implements Spinner.OnItemSelecte
 
 
     private TextView textViewName;
+
+    public static final String KEY_NIS = "nis";
+    public static final String KEY_PWD = "password";
+    public static final String KEY_NAMA = "nama";
+    public static final String KEY_ID_KELAS = "id_kelas";
 
 
 
@@ -89,12 +94,13 @@ public class Register extends AppCompatActivity implements Spinner.OnItemSelecte
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String a = nis.getText().toString();
-                String b = password.getText().toString();
-                String c = nama.getText().toString();
-                String d = getIdKelas(ambilIDKelas);
-
-                Log.d("UYEEEE", a+ " " + b + " " + c + "  " +d );
+//                String a = nis.getText().toString();
+//                String b = password.getText().toString();
+//                String c = nama.getText().toString();
+//                String d = getIdKelas(ambilIDKelas);
+//
+//                Log.d("UYEEEE", a+ " " + b + " " + c + "  " +d );
+                registerUser();
             }
         });
 
@@ -188,21 +194,50 @@ public class Register extends AppCompatActivity implements Spinner.OnItemSelecte
     }
 
 
-    public void insert(){
-        String saveNis = nis.getText().toString();
-        String savePass = nis.getText().toString();
-        String saveNama = nis.getText().toString();
-
-        //parsing id kelas
-        String sIdKelas = getIdKelas(ambilIDKelas);
-        int saveIdKelas = Integer.parseInt(sIdKelas);
-
-
-    }
 
 
 
 
+
+//coba simpan
+private void registerUser(){
+    final String a = nis.getText().toString().trim();
+    final String b = password.getText().toString().trim();
+    final String c = nama.getText().toString().trim();
+
+    //parsing id kelas
+        final String sIdKelas = getIdKelas(ambilIDKelas);
+    //final String sIdKelas = "100000";
+       //final int saveIdKelas = Integer.parseInt(sIdKelas);
+
+    StringRequest sR = new StringRequest(Request.Method.POST, "http://"+ambilIP+"/new_udj/insert.php",
+            new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(Register.this,response,Toast.LENGTH_LONG).show();
+                }
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(Register.this,error.toString(),Toast.LENGTH_LONG).show();
+                }
+            }){
+        @Override
+        protected Map<String,String> getParams(){
+            Map<String,String> params = new HashMap<String, String>();
+            params.put(KEY_NIS,a);
+            params.put(KEY_PWD,b);
+            params.put(KEY_NAMA, c);
+            params.put(KEY_ID_KELAS, sIdKelas);
+            return params;
+        }
+
+    };
+
+    RequestQueue requestQueue = Volley.newRequestQueue(this);
+    requestQueue.add(sR);
+}
 
 
 
