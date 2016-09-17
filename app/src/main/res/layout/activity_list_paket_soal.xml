@@ -39,8 +39,7 @@
         android:text="Load Paket soal"
         android:id="@+id/buttonLoadPaket"
 
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/button_login_form" />
+        android:layout_alignParentBottom="true" />
 
     <TextView
         android:layout_width="wrap_content"

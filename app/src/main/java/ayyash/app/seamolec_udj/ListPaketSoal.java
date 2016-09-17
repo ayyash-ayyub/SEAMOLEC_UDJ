@@ -136,7 +136,7 @@ public class ListPaketSoal extends AppCompatActivity {
 
     public void JSON_DATA_WEB_CALL(){
 
-        jsonArrayRequest = new JsonArrayRequest("http://"+ambilIP+"/new_udj/jsonData.php",
+        jsonArrayRequest = new JsonArrayRequest("http://"+ambilIP+"/new_udj/loadpaket.php",
 
                 new Response.Listener<JSONArray>() {
                     @Override
