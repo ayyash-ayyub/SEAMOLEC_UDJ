@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Ayyash on 9/15/2016.
+ * Created by Abdul Rizal Adompo on 9/18/2016.
  */
 public class Login extends AppCompatActivity {
 
@@ -47,7 +47,7 @@ public class Login extends AppCompatActivity {
         SharedPreferences sps = getSharedPreferences("", MODE_PRIVATE);
          ambilIP = sps.getString("IPnya", "");
 
-        Toast.makeText(Login.this, "IP Server: " + ambilIP, Toast.LENGTH_LONG).show();
+        Toast.makeText(Login.this, "Connecting to Server....: " + ambilIP, Toast.LENGTH_LONG).show();
 
 
 

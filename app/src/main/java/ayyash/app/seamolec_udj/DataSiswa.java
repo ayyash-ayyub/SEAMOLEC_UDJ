@@ -10,7 +10,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Ayyash on 9/14/2016.
+ * Created by Abdul Rizal Adompo on 9/18/2016.
  */
 public class DataSiswa {
 

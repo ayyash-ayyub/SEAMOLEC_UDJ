@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ayyash on 9/15/2016.
+ * Created by Abdul Rizal Adompo on 9/18/2016.
  */
 public class ListPaketSoal extends AppCompatActivity {
 
@@ -41,7 +44,7 @@ public class ListPaketSoal extends AppCompatActivity {
     private String ambilIP;
 
 
-    List<GetDataAdapterSiswa> GetDataAdapter1;
+    List<GetDataQuiz> GetDataAdapter1;
 
     RecyclerView recyclerView;
 
@@ -52,11 +55,11 @@ public class ListPaketSoal extends AppCompatActivity {
     ProgressBar progressBar;
 
     //String GET_JSON_DATA_HTTP_URL = "http://192.168.50.38/new_udj/jsonData.php";
-    String JSON_ID_SISWA = "id_siswa";
-    String JSON_NIS = "nis";
-    String JSON_PASSWORD = "password";
-    String JSON_NAMA = "nama";
+
     String JSON_ID_KELAS = "id_kelas";
+    String JSON_NAMA_QUIZ = "nama_quiz";
+    String JSON_TGL_SELESAI = "tgl_selesai";
+    String JSON_DURASI = "durasi";
 
     Button buttonLoadPaket;
 
@@ -95,7 +98,7 @@ public class ListPaketSoal extends AppCompatActivity {
         ambilIP = sps.getString("IPnya", "");
 
 
-        Toast.makeText(ListPaketSoal.this, "Listening to IP: : " + ambilIP, Toast.LENGTH_LONG).show();
+        Toast.makeText(ListPaketSoal.this, "Connected! : " + ambilIP, Toast.LENGTH_LONG).show();
 
 
 
@@ -136,15 +139,40 @@ public class ListPaketSoal extends AppCompatActivity {
 
     public void JSON_DATA_WEB_CALL(){
 
-        jsonArrayRequest = new JsonArrayRequest("http://"+ambilIP+"/new_udj/loadpaket.php",
+        jsonArrayRequest = new JsonArrayRequest("http://"+ambilIP+"/new_udj/loadQuiz.php",
 
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
 
                         progressBar.setVisibility(View.GONE);
+                        //aktifkan
+                      //  JSON_PARSE_DATA_AFTER_WEBCALL(response);
 
-                        JSON_PARSE_DATA_AFTER_WEBCALL(response);
+
+
+                        try {
+                            JSONObject ar = response.getJSONObject(2);
+
+                         // JSONArray a = response.optJSONArray(3);
+
+
+                         //  String name = a.optString("nama_quiz");
+
+
+                            JSONArray ara = ar.getJSONArray("nama_quiz");
+
+                          //  if(response.getJSONArray(1).toString().equals(1)){
+                                Toast.makeText(getApplicationContext(),"yang di get: "+ara, Toast.LENGTH_SHORT).show();
+
+
+                               // Toast.makeText(getApplicationContext(),"Beda", Toast.LENGTH_SHORT).show();
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -163,18 +191,20 @@ public class ListPaketSoal extends AppCompatActivity {
 
         for(int i = 0; i<array.length(); i++) {
 
-            GetDataAdapterSiswa GetDataAdapter2 = new GetDataAdapterSiswa();
+            GetDataQuiz GetDataAdapter2 = new GetDataQuiz();
 
             JSONObject json = null;
             try {
                 json = array.getJSONObject(i);
 
-                GetDataAdapter2.setId_siswa(json.getInt(JSON_ID_SISWA));
-                GetDataAdapter2.setNis(json.getInt(JSON_NIS));
+                GetDataAdapter2.setId_kelas(json.getInt(JSON_ID_KELAS));
+                GetDataAdapter2.setNama_quiz(json.getString(JSON_NAMA_QUIZ));
                 //  GetDataAdapter2.setPassword(json.getString(JSON_PASSWORD));
-                GetDataAdapter2.setNama(json.getString(JSON_NAMA));
-                GetDataAdapter2.setIdKelas(json.getInt(JSON_ID_KELAS));
+                GetDataAdapter2.setTgl_selesai(json.getString(JSON_TGL_SELESAI));
+                GetDataAdapter2.setDurasi(json.getInt(JSON_DURASI));
 
+               // String aa = GetDataAdapter2.setNama(json.getString(JSON_NAMA).toString());
+                tampilCurrentUser.setText("Login as: "  );
 
 
             } catch (JSONException e) {

@@ -1,7 +1,7 @@
 package ayyash.app.seamolec_udj;
 
 /**
- * Created by Ayyash on 9/15/2016.
+ * Created by Abdul Rizal Adompo on 9/18/2016.
  */
 public class ConfigKelas {
 

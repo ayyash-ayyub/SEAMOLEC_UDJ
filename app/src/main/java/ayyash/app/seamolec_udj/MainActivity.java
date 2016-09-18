@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Created by Abdul Rizal Adompo on 9/18/2016.
+ */
 public class MainActivity extends AppCompatActivity {
 
     Button btnSentIP;

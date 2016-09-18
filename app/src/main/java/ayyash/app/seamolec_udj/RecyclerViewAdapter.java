@@ -17,12 +17,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private final Context context;
 
-    List<GetDataAdapterSiswa> getDataAdapter;
+    List<GetDataQuiz> getDataAdapter;
     Button btnTampan;
 
 
 
-    public RecyclerViewAdapter(List<GetDataAdapterSiswa> getDataAdapter, Context context){
+    public RecyclerViewAdapter(List<GetDataQuiz> getDataAdapter, Context context){
 
         super();
 
@@ -51,19 +51,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         return viewHolder;
     }
-    GetDataAdapterSiswa getDataAdapter1;
+    GetDataQuiz getDataAdapter1;
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
        getDataAdapter1 =  getDataAdapter.get(position);
 
-        holder.tampilIDSiswa.setText(String.valueOf(getDataAdapter1.getId_siswa()).toString());
+        holder.id_kelas.setText(": "+String.valueOf(getDataAdapter1.getId_kelas()).toString());
 
-        holder.tampilNis.setText(String.valueOf(getDataAdapter1.getNis()).toString());
+        holder.nama_quiz.setText(": "+getDataAdapter1.getNama_quiz().toString());
 
-        holder.tampilNama.setText(getDataAdapter1.getNama());
+        holder.tgl_selesai.setText(": "+getDataAdapter1.getTgl_selesai());
 
-        holder.tampilIdKelas.setText(String.valueOf(getDataAdapter1.getIdKelas()).toString());
+        holder.durasi.setText(": "+String.valueOf(String.valueOf(getDataAdapter1.getDurasi()).toString()));
 
     }
 
@@ -82,10 +82,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tampilIDSiswa;
-        public TextView tampilNis;
-        public TextView tampilNama;
-        public TextView tampilIdKelas;
+        public TextView id_kelas;
+        public TextView nama_quiz;
+        public TextView tgl_selesai;
+        public TextView durasi;
 
 
 
@@ -94,10 +94,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
 
 
-            tampilIDSiswa = (TextView) itemView.findViewById(R.id.tampil_ID_siswa) ;
-            tampilNis = (TextView) itemView.findViewById(R.id.tampilNis) ;
-            tampilNama = (TextView) itemView.findViewById(R.id.tampilNama) ;
-            tampilIdKelas = (TextView) itemView.findViewById(R.id.tampilIDKelas) ;
+            id_kelas = (TextView) itemView.findViewById(R.id.tampilIdKelas) ;
+            nama_quiz = (TextView) itemView.findViewById(R.id.tampilNamaQuiz) ;
+            tgl_selesai = (TextView) itemView.findViewById(R.id.batasAkhir) ;
+            durasi = (TextView) itemView.findViewById(R.id.tampilDurasi) ;
 
 
 

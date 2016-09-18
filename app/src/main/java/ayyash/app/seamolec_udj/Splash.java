@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * Created by Abdul Rizal Adompo on 9/18/2016.
+ */
 public class Splash extends AppCompatActivity {
 
     private static int splashInterval = 2000;

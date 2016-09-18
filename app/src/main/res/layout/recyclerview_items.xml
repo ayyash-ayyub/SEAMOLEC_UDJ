@@ -25,15 +25,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ID SISWA : "
+        android:text="ID_KELAS"
          />
 
     <TextView
-        android:id="@+id/tampil_ID_siswa"
+        android:id="@+id/tampilIdKelas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ID Show Here"
+        android:text="id kelas"
          />
         </TableRow>
 
@@ -44,15 +44,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="NIS : "
+        android:text="NAMA QUIZ"
          />
 
     <TextView
-        android:id="@+id/tampilNis"
+        android:id="@+id/tampilNamaQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Name Show Here" />
+        android:text="nama quiz nih" />
     </TableRow>
 
     <TableRow>
@@ -62,15 +62,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nama : "
+        android:text="VALID UNTIL"
          />
 
     <TextView
-        android:id="@+id/tampilNama"
+        android:id="@+id/batasAkhir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Phone Number Show"
+        android:text="batas akhir "
         />
     </TableRow>
 
@@ -81,15 +81,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ID_KELAS : "
+        android:text="DURASI"
          />
 
     <TextView
-        android:id="@+id/tampilIDKelas"
+        android:id="@+id/tampilDurasi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Subject Show Here"
+        android:text="durasi muncul disini"
          />
 
         <Space
