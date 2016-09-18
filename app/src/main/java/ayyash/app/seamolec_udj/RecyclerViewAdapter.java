@@ -1,5 +1,6 @@
 package ayyash.app.seamolec_udj;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,7 +73,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         btnTampan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),""+getDataAdapter.get(position).getId_quiz(),Toast.LENGTH_SHORT).show();
+
+                int id_quiz = getDataAdapter.get(position).getId_quiz();
+                Intent i = new Intent(context, Soal.class);
+
+                i.putExtra("kirimanIDQuiz", id_quiz);
+                   context.startActivity(i);
+
 
             }
         });
