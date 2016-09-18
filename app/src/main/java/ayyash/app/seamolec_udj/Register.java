@@ -38,7 +38,7 @@ import java.util.Map;
 
 
 /**
- * Created by Abdul Rizal Adompo on 9/18/2016.
+ * Created by Abdu on 9/15/2016.
  */
 public class Register extends AppCompatActivity implements Spinner.OnItemSelectedListener   {
 

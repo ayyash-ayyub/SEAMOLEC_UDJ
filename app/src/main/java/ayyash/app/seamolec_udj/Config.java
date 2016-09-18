@@ -14,4 +14,5 @@ public class Config {
     public static final String AMBIL_NAMA = "nama";
     public static final String NIS_SHARED_PREF = "nis";
     public static final String LOGGEDIN_SHARED_PREF = "loggedin";
+    public static final String ID_KELAS = "id_kelas";
 }

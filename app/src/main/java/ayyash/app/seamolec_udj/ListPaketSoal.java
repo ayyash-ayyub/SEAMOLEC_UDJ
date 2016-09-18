@@ -1,5 +1,6 @@
 package ayyash.app.seamolec_udj;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,16 +15,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
 
@@ -34,6 +38,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 /**
  * Created by Abdul Rizal Adompo on 9/18/2016.
@@ -52,9 +58,11 @@ public class ListPaketSoal extends AppCompatActivity {
     RecyclerView.LayoutManager recyclerViewlayoutManager;
 
     RecyclerView.Adapter recyclerViewadapter;
+    private ArrayList<String> students = new ArrayList<>();
 
     ProgressBar progressBar;
-
+    String nis;
+    private JSONArray result;
     //String GET_JSON_DATA_HTTP_URL = "http://192.168.50.38/new_udj/jsonData.php";
 
     String JSON_ID_KELAS = "id_kelas";
@@ -62,11 +70,17 @@ public class ListPaketSoal extends AppCompatActivity {
     String JSON_TGL_SELESAI = "tgl_selesai";
     String JSON_DURASI = "durasi";
 
+    //current
+    public static final String KEY_NAMA = "nama";
+    public static final String KEY_NIS= "NIS";
+    public static final String KEY_ID_KELAS = "id_kelas";
+
     Button buttonLoadPaket;
 
     JsonArrayRequest jsonArrayRequest ;
 
     RequestQueue requestQueue ;
+    private ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,14 +96,19 @@ public class ListPaketSoal extends AppCompatActivity {
 
        /* Bottom toolbar. */
 
-        //proses load list soal
 
-            loadListPaket();
+
+
+
+
+
+
+           loadListPaket();
         //proses load list soal
 
 
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        String nis = sharedPreferences.getString(Config.NIS_SHARED_PREF,"tidak tersedia");
+         nis = sharedPreferences.getString(Config.NIS_SHARED_PREF,"tidak tersedia");
 
 
 
@@ -103,8 +122,8 @@ public class ListPaketSoal extends AppCompatActivity {
 
 
 
-
-        tampilCurrentUser.setText("Current NIS:  : " + nis);
+        cocokanCurrentUser();
+        tampilCurrentUser.setText("selamat datang:  : " + nis);
 
 
     }
@@ -137,11 +156,12 @@ public class ListPaketSoal extends AppCompatActivity {
 
     }
 
-    int ambilIDKelas;
-    String ambilNamaQuiz;
+
     public void JSON_DATA_WEB_CALL(){
 
-        jsonArrayRequest = new JsonArrayRequest("http://"+ambilIP+"/new_udj/loadQuiz.php",
+        String eco = cur_id_kelas;
+
+        jsonArrayRequest = new JsonArrayRequest("http://"+ambilIP+"/new_udj/loadQuiz.php?id_kelas="+eco,
 
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -207,7 +227,7 @@ public class ListPaketSoal extends AppCompatActivity {
                 GetDataAdapter2.setDurasi(json.getInt(JSON_DURASI));
 
                // String aa = GetDataAdapter2.setNama(json.getString(JSON_NAMA).toString());
-                tampilCurrentUser.setText("Login as: "  );
+                tampilCurrentUser.setText("Login as: " +nama );
 
 
             } catch (JSONException e) {
@@ -225,6 +245,87 @@ public class ListPaketSoal extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
+
+    private void cocokanCurrentUser(){
+
+       // "http://"+ambilIP+"/new_udj/get_current_user.php?id="
+
+        String eco = nis;
+
+
+        loading = ProgressDialog.show(this,"Loading...","Fetching...",false,false);
+
+        String url = "http://"+ambilIP+"/new_udj/get_current_user.php?nis="+eco;
+
+        StringRequest stringRequest = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                loading.dismiss();
+                showJSON(response);
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ListPaketSoal.this,error.getMessage().toString(),Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+
+
+    }
+
+
+    String nama="";
+    String cur_id_kelas ="";
+    private void showJSON(String response){
+        String niss="";
+
+
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray result = jsonObject.getJSONArray(GetDataCurrentLogin.JSON_ARRAY);
+            JSONObject ar = result.getJSONObject(0);
+            niss = ar.getString(GetDataCurrentLogin.KEY_CURRENT_NIS);
+            nama = ar.getString(GetDataCurrentLogin.KEY_CURRENT_NAMA);
+            cur_id_kelas = ar.getString(GetDataCurrentLogin.KEY_CURRENT_ID_KELAS);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        tampilCurrentUser.setText("Login as: "+nama);
+
+        Toast.makeText(getApplicationContext(),"test lagi : " + niss +nama +cur_id_kelas, Toast.LENGTH_LONG).show();
+        Log.d("eco: ",response);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

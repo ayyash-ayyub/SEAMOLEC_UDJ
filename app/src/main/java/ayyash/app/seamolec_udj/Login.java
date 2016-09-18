@@ -19,6 +19,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +35,7 @@ public class Login extends AppCompatActivity {
 
 
     EditText nis, password;
+    String id_kelas;
     Button btnLogin,btnRegister;
     private String ambilIP;
     private boolean loggedIn = false;
@@ -92,10 +98,12 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    int ambilIDKelas;
 
     private void login(){
         final String nisA = nis.getText().toString().trim();
         final String passwordA =password .getText().toString().trim();
+
 
 
 
@@ -112,6 +120,13 @@ public class Login extends AppCompatActivity {
 
                             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
                             editor.putString(Config.NIS_SHARED_PREF, nisA);
+
+
+
+
+
+
+
 
 
                             editor.commit();
