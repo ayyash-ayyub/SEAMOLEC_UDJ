@@ -32,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -136,7 +137,8 @@ public class ListPaketSoal extends AppCompatActivity {
 
     }
 
-
+    int ambilIDKelas;
+    String ambilNamaQuiz;
     public void JSON_DATA_WEB_CALL(){
 
         jsonArrayRequest = new JsonArrayRequest("http://"+ambilIP+"/new_udj/loadQuiz.php",
@@ -147,31 +149,32 @@ public class ListPaketSoal extends AppCompatActivity {
 
                         progressBar.setVisibility(View.GONE);
                         //aktifkan
-                      //  JSON_PARSE_DATA_AFTER_WEBCALL(response);
+                        JSON_PARSE_DATA_AFTER_WEBCALL(response);
 
 
 
-                        try {
-                            JSONObject ar = response.getJSONObject(2);
-
-                         // JSONArray a = response.optJSONArray(3);
-
-
-                         //  String name = a.optString("nama_quiz");
-
-
-                            JSONArray ara = ar.getJSONArray("nama_quiz");
-
-                          //  if(response.getJSONArray(1).toString().equals(1)){
-                                Toast.makeText(getApplicationContext(),"yang di get: "+ara, Toast.LENGTH_SHORT).show();
-
-
-                               // Toast.makeText(getApplicationContext(),"Beda", Toast.LENGTH_SHORT).show();
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+//                       try {
+//
+//
+//                           for (int i = 0; i < response.length(); i++) {
+//                               JSONObject row = response.getJSONObject(i);
+//                               ambilIDKelas = row.getInt("id_kelas");
+//                               ambilNamaQuiz = row.getString("nama_quiz");
+//                           }
+//
+//
+//
+//
+//
+//
+//
+//
+//                       Toast.makeText(getApplicationContext(),"ID Kelas : "+ambilIDKelas+ "Nama Quiz : " +ambilNamaQuiz, Toast.LENGTH_SHORT).show();
+//
+//
+//                       } catch (JSONException e) {
+//                           e.printStackTrace();
+//                       }
 
                     }
                 },

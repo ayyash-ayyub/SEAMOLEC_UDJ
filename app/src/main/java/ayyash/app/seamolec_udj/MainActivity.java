@@ -36,11 +36,15 @@ public class MainActivity extends AppCompatActivity {
         btnSentIP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if(txtIP.getText().toString().isEmpty()){
-                   Toast.makeText(MainActivity.this, "masukan IP Server", Toast.LENGTH_SHORT).show();
-               }else {
+//               if(txtIP.getText().toString().isEmpty()){
+//                   Toast.makeText(MainActivity.this, "masukan IP Server", Toast.LENGTH_SHORT).show();
+//               }else {
 
-                   SIERRA_IP = txtIP.getText().toString();
+                   //for dinamis
+                   //SIERRA_IP = txtIP.getText().toString();
+
+                   //for develop
+                   SIERRA_IP = "192.168.50.8";
 
                    // nyimpan IP di SP
                    sp = getSharedPreferences("",MODE_PRIVATE);
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                    startActivity(i);
                    finish();
                }
-            }
+      //      }
         });
     }
 }
