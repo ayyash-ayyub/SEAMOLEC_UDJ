@@ -15,7 +15,7 @@ public class Soal extends AppCompatActivity {
     int id_quiz;
 
 
-    String countryName[] = { "Pilihan A", "Pilihan B", "Pilihan C", "Pilihan D",
+    String opsiSoal[] = { "Pilihan A", "Pilihan B", "Pilihan C", "Pilihan D",
             "Pilihan d" };
 
 
@@ -45,7 +45,7 @@ public class Soal extends AppCompatActivity {
             for (int i1= 0; i1 < 5; i1++) {
                 rb[i1] = new RadioButton(this);
                 rg.addView(rb[i1]);
-                rb[i1].setText(countryName[i1]);
+                rb[i1].setText(opsiSoal[i1]);
 
             }
             mLinearLayout.addView(rg);
