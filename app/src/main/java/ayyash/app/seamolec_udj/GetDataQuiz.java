@@ -40,6 +40,16 @@ public class GetDataQuiz {
     int id_kelas;
     String nama_quiz;
     String tgl_selesai;
+
+    public int getId_quiz() {
+        return id_quiz;
+    }
+
+    public void setId_quiz(int id_quiz) {
+        this.id_quiz = id_quiz;
+    }
+
+    int id_quiz;
     int durasi;
 
 }

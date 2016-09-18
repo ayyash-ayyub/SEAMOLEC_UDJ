@@ -6,7 +6,7 @@ package ayyash.app.seamolec_udj;
 public class GetDataCurrentLogin {
 
 
-        public static final String DATA_URL = "http:/192.168.50.8/new_udj/get_current_user.php?id=";
+      //  public static final String DATA_URL = "http:/192.168.50.8/new_udj/get_current_user.php?id=";
         public static final String KEY_CURRENT_NIS = "nis";
         public static final String KEY_CURRENT_NAMA = "nama";
         public static final String KEY_CURRENT_ID_KELAS = "id_kelas";

@@ -25,16 +25,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ID_KELAS"
-         />
+        android:text="ID_KELAS" />
 
     <TextView
         android:id="@+id/tampilIdKelas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="id kelas"
-         />
+        android:text="id kelas" />
         </TableRow>
 
     <TableRow>
@@ -44,8 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="NAMA QUIZ"
-         />
+        android:text="NAMA QUIZ" />
 
     <TextView
         android:id="@+id/tampilNamaQuiz"
@@ -62,16 +59,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="VALID UNTIL"
-         />
+        android:text="VALID UNTIL" />
 
     <TextView
         android:id="@+id/batasAkhir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="batas akhir "
-        />
+        android:text="batas akhir " />
     </TableRow>
 
     <TableRow>
@@ -81,16 +76,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="DURASI"
-         />
+        android:text="DURASI" />
 
     <TextView
         android:id="@+id/tampilDurasi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="durasi muncul disini"
-         />
+        android:text="durasi muncul disini" />
 
         <Space
             android:layout_width="20px"

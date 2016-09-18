@@ -67,6 +67,7 @@ public class ListPaketSoal extends AppCompatActivity {
 
     String JSON_ID_KELAS = "id_kelas";
     String JSON_NAMA_QUIZ = "nama_quiz";
+    String JSON_ID_QUIZ ="id_quiz";
     String JSON_TGL_SELESAI = "tgl_selesai";
     String JSON_DURASI = "durasi";
 
@@ -220,7 +221,7 @@ public class ListPaketSoal extends AppCompatActivity {
             try {
                 json = array.getJSONObject(i);
 
-                GetDataAdapter2.setId_kelas(json.getInt(JSON_ID_KELAS));
+                GetDataAdapter2.setId_quiz(json.getInt(JSON_ID_QUIZ));
                 GetDataAdapter2.setNama_quiz(json.getString(JSON_NAMA_QUIZ));
                 //  GetDataAdapter2.setPassword(json.getString(JSON_PASSWORD));
                 GetDataAdapter2.setTgl_selesai(json.getString(JSON_TGL_SELESAI));
@@ -303,9 +304,9 @@ public class ListPaketSoal extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        tampilCurrentUser.setText("Login as: "+nama);
+       // tampilCurrentUser.setText("Login as: "+nama);
 
-        Toast.makeText(getApplicationContext(),"test lagi : " + niss +nama +cur_id_kelas, Toast.LENGTH_LONG).show();
+       // Toast.makeText(getApplicationContext(),"test lagi : " + niss +nama +cur_id_kelas, Toast.LENGTH_LONG).show();
         Log.d("eco: ",response);
     }
 

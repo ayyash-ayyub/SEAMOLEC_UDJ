@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -52,18 +53,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return viewHolder;
     }
     GetDataQuiz getDataAdapter1;
+    ViewHolder holderLuar;
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+
+        this.holderLuar =holder;
 
        getDataAdapter1 =  getDataAdapter.get(position);
 
-        holder.id_kelas.setText(": "+String.valueOf(getDataAdapter1.getId_kelas()).toString());
+        holder.id_kelas.setText(": "+String.valueOf(getDataAdapter1.getId_quiz()).toString());
 
         holder.nama_quiz.setText(": "+getDataAdapter1.getNama_quiz().toString());
 
         holder.tgl_selesai.setText(": "+getDataAdapter1.getTgl_selesai());
 
         holder.durasi.setText(": "+String.valueOf(String.valueOf(getDataAdapter1.getDurasi()).toString()));
+
+        btnTampan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),""+getDataAdapter.get(position).getId_quiz(),Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
 
     }
 
@@ -105,16 +119,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
-            btnTampan.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("Uye", "BAYAR");
-//                    Intent i = new Intent(context, Lemparan.class);
+
+
+           // btnTampan.setOnClickListener(new View.OnClickListener() {
+             //   @Override
+             //   public void onClick(View v) {
+             //       Log.d("Uye", "BAYAR");
+//            /        Intent i = new Intent(context, Lemparan.class);
 //                        context.startActivity(i);
 //                       ((MainActivity)context).finish();
+                 //   String aa = getDataAdapter1.get
 
-                }
-            });
+
+                    //Toast.makeText(context, "H"+ aa,Toast.LENGTH_SHORT).show();
+
+           //     }
+           // });
 
 
 

@@ -51,7 +51,7 @@
         android:layout_toEndOf="@+id/progressBar1"
         android:layout_marginLeft="25dp"
         android:layout_marginStart="25dp"
-        android:textColor="#52d600" />
+        android:textColor="#fdf97e" />
 
 
 </RelativeLayout>
